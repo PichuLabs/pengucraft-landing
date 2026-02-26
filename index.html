@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PenguCraft</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0d0f13;
+      --bg-secondary: #151820;
+      --bg-card: #1a1d28;
+      --border: #252a36;
+      --text-primary: #e8eaf0;
+      --text-secondary: #8b90a0;
+      --accent: #5b8a5e;
+      --accent-glow: rgba(91, 138, 94, 0.15);
+      --accent-bright: #6fbf73;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(91, 138, 94, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91, 138, 94, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .logo {
+      margin-bottom: 3rem;
+    }
+
+    .title {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.1;
+    }
+
+    .title span {
+      color: var(--accent-bright);
+    }
+
+    .server-ip {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      display: inline-block;
+      position: relative;
+    }
+
+    .server-ip:hover {
+      color: var(--accent-bright);
+      border-color: var(--border);
+      background: var(--bg-card);
+    }
+
+    .server-ip .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) scale(0.95);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--accent-bright);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.3rem 0.65rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    .server-ip .tooltip.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Metrics */
+    .metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px var(--border),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 60px var(--accent-glow);
+    }
+
+    .metric {
+      background: var(--bg-card);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value .cap {
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .online-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--accent-bright);
+      border-radius: 50%;
+      margin-right: 8px;
+      box-shadow: 0 0 8px var(--accent-bright);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      body {
+        padding: 1.5rem;
+      }
+
+      .title {
+        font-size: 2.25rem;
+      }
+
+      .server-ip {
+        font-size: 0.9rem;
+      }
+
+      .metric {
+        padding: 1rem 1.25rem;
+      }
+
+      .metric-label {
+        font-size: 0.75rem;
+      }
+
+      .metric-value {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      <h1 class="title">Pengu<span>Craft</span></h1>
+      <div class="server-ip" onclick="copyIP()">
+        play.PenguCraft.com
+        <div class="tooltip" id="copyTooltip">Copied!</div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <span class="metric-label">Unique Players</span>
+        <span class="metric-value" id="uniquePlayers">—</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Currently Online</span>
+        <span class="metric-value" id="onlineCount">
+          <span class="online-dot"></span>
+          <span id="onlineValue">—</span>
+        </span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Server Age</span>
+        <span class="metric-value" id="serverAge">—</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Configuration ---
+    var UNIQUE_PLAYERS = 12482;
+    var MAX_PLAYERS = 100;
+    var SERVER_START = new Date(2026, 1, 26); // February 26, 2026
+    var ONLINE_UPDATE_INTERVAL = 5000; // ms
+
+    // --- Unique Players ---
+    document.getElementById('uniquePlayers').textContent =
+      UNIQUE_PLAYERS.toLocaleString();
+
+    // --- Online Count ---
+    function updateOnline() {
+      var count = Math.floor(Math.random() * (MAX_PLAYERS + 1));
+      document.getElementById('onlineValue').innerHTML =
+        count + ' <span class="cap">/ ' + MAX_PLAYERS + '</span>';
+    }
+    updateOnline();
+    setInterval(updateOnline, ONLINE_UPDATE_INTERVAL);
+
+    // --- Server Age ---
+    function updateServerAge() {
+      var now = new Date();
+      var diff = now - SERVER_START;
+      var days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+      document.getElementById('serverAge').textContent = days + (days === 1 ? ' day' : ' days');
+    }
+    updateServerAge();
+
+    // --- Copy IP ---
+    function copyIP() {
+      var ip = 'play.PenguCraft.com';
+      var tooltip = document.getElementById('copyTooltip');
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(ip);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = ip;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+
+      tooltip.classList.add('show');
+      setTimeout(function () {
+        tooltip.classList.remove('show');
+      }, 1500);
+    }
+  </script>
+
+</body>
+</html>
