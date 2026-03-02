@@ -6,6 +6,7 @@
   <title>PenguCraft</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap');
 
     *,
     *::before,
@@ -22,9 +23,11 @@
       --border: #252a36;
       --text-primary: #e8eaf0;
       --text-secondary: #8b90a0;
-      --accent: #5b8a5e;
-      --accent-glow: rgba(91, 138, 94, 0.15);
-      --accent-bright: #6fbf73;
+      --accent: #0088d4;
+      --accent-glow: rgba(0, 163, 255, 0.15);
+      --accent-bright: #00A3FF;
+      --discord-blurple: #5865F2;
+      --live-green: #44cc55;
     }
 
     body {
@@ -68,9 +71,63 @@
     }
 
     .socials a:hover {
+      transform: scale(1.05);
+    }
+
+    /* Discord CTA */
+    .discord-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 12px;
+      border: 1px solid #5865F2;
+      background: rgba(88, 101, 242, 0.12);
       color: #ffffff;
-      border-color: var(--accent-bright);
-      background: rgba(91, 138, 94, 0.15);
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .discord-cta svg {
+      width: 22px;
+      height: 22px;
+      fill: #5865F2;
+      flex-shrink: 0;
+    }
+
+    .discord-cta:hover {
+      background: rgba(88, 101, 242, 0.25);
+      box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+      transform: scale(1.02);
+    }
+
+    .socials a.discord:hover {
+      color: #5865F2;
+      border-color: #5865F2;
+      background: rgba(88, 101, 242, 0.15);
+    }
+
+    .socials a.twitter:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .socials a.youtube:hover {
+      color: #FF0000;
+      border-color: #FF0000;
+      background: rgba(255, 0, 0, 0.12);
+    }
+
+    .socials a.tiktok:hover {
+      color: #ff0050;
+      border-color: #ff0050;
+      background: rgba(255, 0, 80, 0.12);
     }
 
     .socials a svg {
@@ -104,8 +161,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(91, 138, 94, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(91, 138, 94, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(0, 163, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 163, 255, 0.03) 1px, transparent 1px);
       background-size: 48px 48px;
       pointer-events: none;
     }
@@ -118,62 +175,81 @@
 
     /* Header */
     .logo {
-      margin-bottom: 3rem;
+      margin-bottom: 1.25rem;
     }
 
     .logo-img {
       width: 160px;
       height: auto;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.75rem;
     }
 
     .title {
-      font-size: 4.5rem;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 5.5rem;
       font-weight: 700;
-      letter-spacing: -0.02em;
       color: #ffffff;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1.75rem;
       line-height: 1.1;
+      letter-spacing: 0.02em;
+      text-shadow:
+        0 0 10px rgba(0, 163, 255, 0.4),
+        0 0 30px rgba(0, 163, 255, 0.15),
+        3px 3px 0px rgba(0, 0, 0, 0.5);
     }
 
     .server-ip {
-      font-size: 1.2rem;
-      font-weight: 500;
+      font-size: 1.5rem;
+      font-weight: 600;
       color: #ffffff;
       letter-spacing: 0.04em;
       cursor: pointer;
-      padding: 1rem 1.5rem;
-      border-radius: 12px;
+      padding: 1.25rem 2.25rem;
+      border-radius: 14px;
       border: 1px solid var(--border);
       background: var(--bg-card);
       box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.3),
         0 0 60px var(--accent-glow);
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       display: inline-block;
       position: relative;
+      margin-top: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .server-ip.copied {
+      background: #22c55e;
+      border-color: #22c55e;
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(34, 197, 94, 0.4);
     }
 
     .server-ip:hover {
       color: var(--accent-bright);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 15px var(--accent-bright);
     }
 
     .server-ip .tooltip {
       position: absolute;
-      bottom: calc(100% + 8px);
+      bottom: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%) scale(0.95);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--accent-bright);
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.3rem 0.65rem;
-      border-radius: 5px;
+      background: #22c55e;
+      border: 1px solid #22c55e;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
       white-space: nowrap;
       opacity: 0;
       pointer-events: none;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
     }
 
     .server-ip .tooltip.show {
@@ -209,6 +285,7 @@
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .metric-value {
@@ -216,6 +293,7 @@
       font-weight: 600;
       color: var(--text-primary);
       font-variant-numeric: tabular-nums;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .metric-value .cap {
@@ -225,12 +303,12 @@
 
     .online-dot {
       display: inline-block;
-      width: 9px;
-      height: 9px;
-      background: var(--accent-bright);
+      width: 10px;
+      height: 10px;
+      background: var(--live-green);
       border-radius: 50%;
       margin-right: 8px;
-      box-shadow: 0 0 8px var(--accent-bright);
+      box-shadow: 0 0 8px var(--live-green);
       animation: pulse 2s ease-in-out infinite;
     }
 
@@ -246,11 +324,12 @@
       }
 
       .title {
-        font-size: 3rem;
+        font-size: 3.25rem;
       }
 
       .server-ip {
-        font-size: 1rem;
+        font-size: 1.15rem;
+        padding: 1rem 1.75rem;
       }
 
       .metric {
@@ -298,17 +377,19 @@
       </div>
     </div>
 
+    <a href="#" class="discord-cta" aria-label="Discord">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      Join us on Discord
+    </a>
+
     <div class="socials">
-      <a href="#" aria-label="Discord">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-      </a>
-      <a href="#" aria-label="X (Twitter)">
+      <a href="#" aria-label="X (Twitter)" class="twitter">
         <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
-      <a href="#" aria-label="YouTube">
+      <a href="#" aria-label="YouTube" class="youtube">
         <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
       </a>
-      <a href="#" aria-label="TikTok">
+      <a href="#" aria-label="TikTok" class="tiktok">
         <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
       </a>
     </div>
@@ -316,18 +397,29 @@
 
   <script>
     // --- Configuration ---
-    var MAX_PLAYERS = 100;
+    var SERVER_ADDRESS = 'play.PenguCraft.com';
     var SERVER_START = new Date(2026, 1, 26); // February 26, 2026
-    var ONLINE_UPDATE_INTERVAL = 5000; // ms
+    var ONLINE_UPDATE_INTERVAL = 600000; // 10 minutes
 
     // --- Online Count ---
-    var currentOnline = Math.floor(Math.random() * (MAX_PLAYERS + 1));
     function updateOnline() {
-      var delta = Math.floor(Math.random() * 3) + 1; // 1-3
-      var direction = Math.random() < 0.5 ? -1 : 1;
-      currentOnline = Math.min(MAX_PLAYERS, Math.max(0, currentOnline + delta * direction));
-      document.getElementById('onlineValue').innerHTML =
-        currentOnline + ' <span class="cap">/ ' + MAX_PLAYERS + '</span>';
+      fetch('https://api.mcsrvstat.us/2/' + SERVER_ADDRESS)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data.online) {
+            var current = data.players.online;
+            var max = data.players.max;
+            document.getElementById('onlineValue').innerHTML =
+              current + ' <span class="cap">/ ' + max + '</span>';
+          } else {
+            document.getElementById('onlineValue').innerHTML =
+              '0 <span class="cap">/ —</span>';
+          }
+        })
+        .catch(function() {
+          document.getElementById('onlineValue').innerHTML =
+            '0 <span class="cap">/ —</span>';
+        });
     }
     updateOnline();
     setInterval(updateOnline, ONLINE_UPDATE_INTERVAL);
@@ -344,6 +436,7 @@
     // --- Copy IP ---
     function copyIP() {
       var ip = 'play.PenguCraft.com';
+      var btn = document.querySelector('.server-ip');
       var tooltip = document.getElementById('copyTooltip');
 
       if (navigator.clipboard) {
@@ -359,10 +452,13 @@
         document.body.removeChild(ta);
       }
 
+      btn.classList.add('copied');
+      tooltip.textContent = 'IP Copied!';
       tooltip.classList.add('show');
       setTimeout(function () {
+        btn.classList.remove('copied');
         tooltip.classList.remove('show');
-      }, 1500);
+      }, 2000);
     }
   </script>
 
