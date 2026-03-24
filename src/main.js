@@ -3,7 +3,7 @@ import './style.css'
 // --- Configuration ---
 var SERVER_ADDRESS = 'play.PenguCraft.com';
 var SERVER_START = new Date(2026, 1, 26); // February 26, 2026
-var ONLINE_UPDATE_INTERVAL = 600000; // 10 minutes
+var ONLINE_UPDATE_INTERVAL = 120000; // 2 minutes
 
 // --- Online Count ---
 function updateOnline() {
