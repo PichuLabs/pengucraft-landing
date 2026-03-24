@@ -30,10 +30,7 @@ setInterval(updateOnline, ONLINE_UPDATE_INTERVAL);
 
 // --- Server Age ---
 function updateServerAge() {
-  var now = new Date();
-  var diff = now - SERVER_START;
-  var days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
-  document.getElementById('serverAge').textContent = days + (days === 1 ? ' day' : ' days');
+  document.getElementById('serverAge').textContent = '0 days';
 }
 updateServerAge();
 
