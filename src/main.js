@@ -2,7 +2,7 @@ import './style.css'
 
 // --- Configuration ---
 var SERVER_ADDRESS = 'play.PenguCraft.com';
-var SERVER_START = new Date(2026, 1, 26); // February 26, 2026
+var SERVER_START = new Date(2026, 3, 25); // April 25, 2026
 var ONLINE_UPDATE_INTERVAL = 120000; // 2 minutes
 
 // --- Online Count ---
@@ -30,7 +30,9 @@ setInterval(updateOnline, ONLINE_UPDATE_INTERVAL);
 
 // --- Server Age ---
 function updateServerAge() {
-  document.getElementById('serverAge').textContent = '0 days';
+  var msPerDay = 1000 * 60 * 60 * 24;
+  var days = Math.max(0, Math.floor((Date.now() - SERVER_START.getTime()) / msPerDay));
+  document.getElementById('serverAge').textContent = days + (days === 1 ? ' day' : ' days');
 }
 updateServerAge();
 
