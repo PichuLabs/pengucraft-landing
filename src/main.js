@@ -7,7 +7,7 @@ var ONLINE_UPDATE_INTERVAL = 120000; // 2 minutes
 
 // --- Online Count ---
 function updateOnline() {
-  fetch('https://api.mcsrvstat.us/2/' + SERVER_ADDRESS)
+  fetch('https://api.mcstatus.io/v2/status/java/' + SERVER_ADDRESS)
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if (data.online) {
